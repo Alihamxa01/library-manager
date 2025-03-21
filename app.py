@@ -1,7 +1,7 @@
 
 import os
 
-# File to store the library data
+#library data
 LIBRARY_FILE = "library.txt"
 
 # Function to load the library from a file
@@ -12,12 +12,12 @@ def load_library():
         return library
     return []
 
-# Function to save the library to a file
+#save the library to a file
 def save_library(library):
     with open(LIBRARY_FILE, "w") as file:
         file.write(str(library))
 
-# Function to display the menu
+# display the menu
 def display_menu():
     print("\nWelcome to your Personal Library Manager!")
     print("1. Add a book")
@@ -59,7 +59,7 @@ def remove_book(library):
     if not found:
         print("Book not found in the library.")
 
-# Function to search for a book
+#  search for a book
 def search_book(library):
     while True:
         print("Search by:")
@@ -87,7 +87,7 @@ def search_book(library):
             print("No matching books found.")
         break  # Exit the loop after displaying results
 
-# Function to display all books
+#  display all books
 def display_all_books(library):
     if not library:
         print("Your library is empty.")
@@ -98,7 +98,7 @@ def display_all_books(library):
         read_status = "Read" if book["read"] else "Unread"
         print(f"{i}. {book['title']} by {book['author']} ({book['year']}) - {book['genre']} - {read_status}")
 
-# Function to display statistics
+# statistics
 def display_statistics(library):
     total_books = len(library)
     if total_books == 0:
@@ -140,116 +140,3 @@ def main():
 if __name__ == "__main__":
     main()
     
-
-# import streamlit as st
-
-# class PersonalLibraryManager:
-#     def __init__(self):
-#         self.library = []
-
-#     # Add a book
-#     def add_book(self, title, author, publication_year, genre, read_status):
-#         book = {
-#             "title": title,
-#             "author": author,
-#             "publication_year": publication_year,
-#             "genre": genre,
-#             "read_status": read_status
-#         }
-#         self.library.append(book)
-#         st.success("Book added successfully!")
-
-#     # Remove a book
-#     def remove_book(self, title_to_remove):
-#         # Check if the book exists in the library
-#         found_books = [book for book in self.library if book['title'].lower() == title_to_remove.lower()]
-#         if found_books:
-#             self.library = [book for book in self.library if book['title'].lower() != title_to_remove.lower()]
-#             st.success(f"Book '{title_to_remove}' removed successfully!")
-#         else:
-#             st.error(f"No book found with the title '{title_to_remove}'.")
-
-#     # Search for a book
-#     def search_book(self, search_type, search_value):
-#         if search_type == "Title":
-#             matching_books = [book for book in self.library if search_value.lower() in book['title'].lower()]
-#         else:
-#             matching_books = [book for book in self.library if search_value.lower() in book['author'].lower()]
-        
-#         return matching_books
-
-#     # Display all books
-#     def display_books(self):
-#         if not self.library:
-#             st.warning("Your library is empty.")
-#         else:
-#             st.write("Your Library:")
-#             for idx, book in enumerate(self.library, 1):
-#                 read_status = "Read" if book["read_status"] else "Unread"
-#                 st.write(f"{idx}. **{book['title']}** by {book['author']} ({book['publication_year']}) - {book['genre']} - {read_status}")
-
-#     # Display statistics
-#     def display_statistics(self):
-#         total_books = len(self.library)
-#         if total_books == 0:
-#             st.warning("No books in the library.")
-#             return
-        
-#         read_books = sum(1 for book in self.library if book["read_status"])
-#         percentage_read = (read_books / total_books) * 100
-
-#         st.write(f"Total books: {total_books}")
-#         st.write(f"Percentage read: {percentage_read:.2f}%")
-
-# def main():
-#     st.title("Personal Library Manager")
-    
-#     # Create an instance of the library manager
-#     library_manager = PersonalLibraryManager()
-
-#     # Sidebar Menu for selecting actions
-#     menu = ["Add a book", "Remove a book", "Search for a book", "Display all books", "Display statistics"]
-#     choice = st.sidebar.selectbox("Select an option", menu)
-
-#     if choice == "Add a book":
-#         st.subheader("Add a New Book")
-#         title = st.text_input("Book Title")
-#         author = st.text_input("Author")
-#         publication_year = st.number_input("Publication Year", min_value=1000, max_value=2100, step=1)
-#         genre = st.text_input("Genre")
-#         read_status = st.radio("Have you read this book?", ("Yes", "No"))
-        
-#         if st.button("Add Book"):
-#             library_manager.add_book(title, author, publication_year, genre, read_status == "Yes")
-
-#     elif choice == "Remove a book":
-#         st.subheader("Remove a Book")
-#         title_to_remove = st.text_input("Enter the title of the book to remove")
-
-#         if st.button("Remove Book"):
-#             library_manager.remove_book(title_to_remove)
-
-#     elif choice == "Search for a book":
-#         st.subheader("Search for a Book")
-#         search_type = st.selectbox("Search by", ["Title", "Author"])
-#         search_value = st.text_input(f"Enter the {search_type.lower()} to search")
-        
-#         if st.button("Search Book"):
-#             matching_books = library_manager.search_book(search_type, search_value)
-#             if matching_books:
-#                 for idx, book in enumerate(matching_books, 1):
-#                     read_status = "Read" if book["read_status"] else "Unread"
-#                     st.write(f"{idx}. **{book['title']}** by {book['author']} ({book['publication_year']}) - {book['genre']} - {read_status}")
-#             else:
-#                 st.error(f"No books found matching {search_value}")
-
-#     elif choice == "Display all books":
-#         st.subheader("All Books")
-#         library_manager.display_books()
-
-#     elif choice == "Display statistics":
-#         st.subheader("Library Statistics")
-#         library_manager.display_statistics()
-
-# if __name__ == "__main__":
-#     main()
